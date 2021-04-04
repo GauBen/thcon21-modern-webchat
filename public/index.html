@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THC21 WebChat</title>
+  <link rel="stylesheet" href="/design.css">
+</head>
+
+<body>
+  <div class="app-box">
+    <h1 class="title">THC21 WebChat</h1>
+    <div class="message-list">
+      <div class="wrapper" id="messages"></div>
+    </div>
+    <form action="#" class="send-message" id="login-form">
+      <h3 class="title">Login</h3>
+      <label for="nickname" class="label">Nickname:</label>
+      <input type="text" id="nickname" name="nickname" pattern="[a-zA-Z0-9_.-]{3,20}" placeholder="[a-zA-Z0-9_.-]{3,20}"
+        class="padded" required>
+      <label for="color" class="label">Color:</label>
+      <input type="color" id="color" name="color" class="padded">
+      <button type=" submit" class="padded">Send</button>
+    </form>
+    <form action="#" class="send-message" id="message-form" hidden>
+      <input type="text" name="message" class="message" autocomplete="false" required>
+      <button type="submit" class="padded">Send</button>
+    </form>
+  </div>
+  <script src="/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+}
+
+.app-box {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-box > .title {
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 0 0.5em #8888;
+}
+
+.message-list {
+  display: flex;
+  flex: 1;
+  overflow: auto;
+}
+
+.message-list > .wrapper {
+  margin-top: auto;
+  padding: 1em;
+}
+
+.message-list > .wrapper > .message {
+  margin-top: 0.5em;
+}
+
+.send-message {
+  display: flex;
+  gap: 1em;
+  padding: 1em;
+  box-shadow: 0 0 0.5em #8888;
+  align-items: center;
+  justify-content: center;
+}
+
+.send-message > .message {
+  flex: 1;
+  padding: 0.5em;
+  font-size: inherit;
+}
+
+.send-message > .padded {
+  padding: 0.5em;
+  font-size: inherit;
+}
+
+.send-message > .title {
+  margin: 0;
+}
+
+[hidden] {
+  display: none;
+}
