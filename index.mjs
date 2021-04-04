@@ -95,9 +95,8 @@ const handleLogin = (client, data) => {
     // Prevent hacking!
     delete data.admin;
   }
-  const user = Object.assign({}, data);
   nicknames.add(user.nickname);
-  client.user = user;
+  client.user = { ...user };
   client.send(
     JSON.stringify({
       user: { nickname: "Info", color: "#0088ff" },
