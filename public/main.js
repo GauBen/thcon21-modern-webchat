@@ -19,10 +19,12 @@
   const createMessage = (data) => {
     const $el = document.createElement("div");
     $el.className = "message";
-    $el.innerHTML = `<strong style="color:${data.user.color}">${escape(
+    $el.innerHTML = `${
+      data.user.admin ? "<strong>[admin]</strong> " : ""
+    }<strong style="color:${data.user.color}">${escape(
       escape(data.user.nickname)
     )}</strong>: ${
-      "messageRestricted" in data
+      data.messageRestricted
         ? "<i>Message restricted to administrators.</i>"
         : escape(data.message)
     }`;
