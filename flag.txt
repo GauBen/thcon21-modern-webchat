@@ -1,1 +1,1 @@
-THCon21{__proto__:__hacked__}
+THCon21{__ws_hacked__}

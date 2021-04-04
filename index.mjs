@@ -29,7 +29,7 @@ const sendFlag = () => {
       client.send(
         JSON.stringify({
           user: { nickname: "LePireBot", color: "#ff4400", admin: true },
-          message: "Message restricted to administrators.",
+          messageRestricted: true,
         })
       );
     }

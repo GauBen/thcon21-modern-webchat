@@ -21,7 +21,11 @@
     $el.className = "message";
     $el.innerHTML = `<strong style="color:${data.user.color}">${escape(
       escape(data.user.nickname)
-    )}</strong>: ${escape(data.message)}`;
+    )}</strong>: ${
+      "messageRestricted" in data
+        ? "<i>Message restricted to administrators.</i>"
+        : escape(data.message)
+    }`;
     return $el;
   };
 
