@@ -1,4 +1,4 @@
-FROM node:lts AS build
+FROM node:lts
 WORKDIR /app
 COPY . .
 RUN yarn install
