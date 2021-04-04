@@ -1,0 +1,11 @@
+{
+  "name": "challenge",
+  "version": "1.0.0",
+  "main": "index.mjs",
+  "author": "GauBen <benaim.gautier@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.13.1",
+    "ws": "^7.4.4"
+  }
+}
