@@ -45,6 +45,14 @@
     }
   };
 
+  ws.onerror = (e) => {
+    createMessage({
+      user: { nickname: "Error", color: "#ff0000" },
+      message: "Connection closed unexpectedly.",
+    });
+    console.warn(e);
+  };
+
   $loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     ws.send(
