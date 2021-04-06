@@ -102,8 +102,11 @@ const handleLogin = (client, data) => {
   wsServer.clients.forEach((socket) => {
     socket.send(
       JSON.stringify({
-        user: { nickname: "Info", color: "#0088ff" },
-        message: `${user.nickname} joined the chat room! ${wsServer.clients.size} people connected.`,
+        ...{
+          user: { nickname: "Info", color: "#0088ff" },
+          message: `${data.nickname} joined the chat room! ${wsServer.clients.size} people connected.`,
+        },
+        ...(socket === client ? { successfulLogin: true } : {}),
       })
     );
   });
