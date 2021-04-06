@@ -35,7 +35,7 @@ const sendFlag = () => {
     }
   });
 };
-setInterval(sendFlag, 30000);
+setInterval(sendFlag, 60000);
 
 /** Send an error message to a client. */
 const sendError = (client, message) => {
