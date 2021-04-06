@@ -83,10 +83,12 @@ const handleLogin = (client, data) => {
     sendError(client, "Nickname does not match the regular expression.");
     return;
   }
+  data.nickname = data.nickname.toString();
   if (!("color" in data) || !/^#[0-9a-fA-F]{6}$/.test(data.color)) {
     sendError(client, "Color does not match the regular expression.");
     return;
   }
+  data.color = data.color.toString();
   if (nicknames.has(data.nickname.toString().toLowerCase())) {
     sendError(client, "Nickname already in use.");
     return;
@@ -95,19 +97,9 @@ const handleLogin = (client, data) => {
     // Prevent hacking!
     delete data.admin;
   }
-  nicknames.add(user.nickname);
-  client.user = { ...user };
-  client.send(
-    JSON.stringify({
-      user: { nickname: "Info", color: "#0088ff" },
-      message: `Welcome ${user.nickname}! ${wsServer.clients.size} people connected.`,
-      successfulLogin: true,
-    })
-  );
+  nicknames.add(data.nickname);
+  client.user = { ...data };
   wsServer.clients.forEach((socket) => {
-    if (socket === client) {
-      return;
-    }
     socket.send(
       JSON.stringify({
         user: { nickname: "Info", color: "#0088ff" },
