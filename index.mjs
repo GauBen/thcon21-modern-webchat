@@ -133,8 +133,6 @@ wsServer.on("connection", (client) => {
     }
     handleData(client, data);
   });
-  client.on("error", (e) => handleLogout(client));
-  client.on("close", (e) => handleLogout(client));
 });
 
 app.use(koaStatic("./public"));
