@@ -7,28 +7,26 @@ import koaStatic from "koa-static";
 const server = http.createServer();
 const app = new Koa();
 const wsServer = new ws.Server({ server: server, clientTracking: true });
-const flag = fs.readFileSync("./flag.txt").toString();
-
-/** Nicknames in use. */
-const nicknames = new Set(["lepirebot", "info", "admin", "administrator"]);
+const flag = fs.readFileSync("./flag.txt").toString().trim();
 
 /** Send the flag to all administrators. */
 const sendFlag = () => {
   wsServer.clients.forEach((client) => {
     if (client.readyState !== client.OPEN) {
+      handleLogout(client);
       return;
     }
     if ("user" in client && "admin" in client.user && client.user.admin) {
       client.send(
         JSON.stringify({
-          user: { nickname: "LePireBot", color: "#ff4400", admin: true },
+          user: { nickname: "LePireBot", color: "#ECA400", admin: true },
           message: `Well done! Here is the flag: ${flag}`,
         })
       );
     } else {
       client.send(
         JSON.stringify({
-          user: { nickname: "LePireBot", color: "#ff4400", admin: true },
+          user: { nickname: "LePireBot", color: "#ECA400", admin: true },
           messageRestricted: true,
         })
       );
@@ -78,40 +76,47 @@ const handleMessage = (client, data) => {
 };
 
 /** Handle a login form. */
-const handleLogin = (client, data) => {
-  if (!("nickname" in data) || !/^[a-zA-Z0-9_.-]{3,20}$/.test(data.nickname)) {
+const handleLogin = (client, user) => {
+  if (!("nickname" in user) || !/^[a-zA-Z0-9_.-]{3,20}$/.test(user.nickname)) {
     sendError(client, "Nickname does not match the regular expression.");
     return;
   }
-  data.nickname = data.nickname.toString();
-  if (!("color" in data) || !/^#[0-9a-fA-F]{6}$/.test(data.color)) {
+  user.nickname = user.nickname.toString();
+  if (!("color" in user) || !/^#[0-9a-fA-F]{6}$/.test(user.color)) {
     sendError(client, "Color does not match the regular expression.");
     return;
   }
-  data.color = data.color.toString();
-  if (nicknames.has(data.nickname.toString().toLowerCase())) {
+  user.color = user.color.toString();
+  if (nicknameInUse(user.nickname.toLowerCase())) {
     sendError(client, "Nickname already in use.");
     return;
   }
-  if ("admin" in data) {
+  if ("admin" in user) {
     // Prevent hacking!
-    delete data.admin;
+    delete user.admin;
   }
-  nicknames.add(data.nickname);
   client.user = {};
-  Object.assign(client.user, data);
+  Object.assign(client.user, user);
   wsServer.clients.forEach((socket) => {
     socket.send(
       JSON.stringify({
         ...{
           user: { nickname: "Info", color: "#0088ff" },
-          message: `${data.nickname} joined the chat room! ${wsServer.clients.size} people connected.`,
+          message: `${user.nickname} joined the chat room! ${wsServer.clients.size} people connected.`,
         },
         ...(socket === client ? { successfulLogin: true } : {}),
       })
     );
   });
 };
+
+/** Disconnect a socket. */
+const nicknameInUse = (nickname) =>
+  new Set(["lepirebot", "info", "admin", "error"]).has(nickname) ||
+  [...wsServer.clients].some(
+    (socket) =>
+      "user" in socket && socket.user.nickname.toLowerCase() === nickname
+  );
 
 wsServer.on("connection", (client) => {
   client.send(
@@ -128,16 +133,8 @@ wsServer.on("connection", (client) => {
     }
     handleData(client, data);
   });
-
-  client.on("close", () => {
-    if (
-      "user" in client &&
-      "nickname" in client.user &&
-      nicknames.has(client.user.toString().toLowerCase())
-    ) {
-      nicknames.delete(client.user.toString().toLowerCase());
-    }
-  });
+  client.on("error", (e) => handleLogout(client));
+  client.on("close", (e) => handleLogout(client));
 });
 
 app.use(koaStatic("./public"));
