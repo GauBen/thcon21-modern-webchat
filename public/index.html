@@ -19,13 +19,13 @@
       <h3 class="title">Login</h3>
       <label for="nickname" class="label">Nickname:</label>
       <input type="text" id="nickname" name="nickname" pattern="[a-zA-Z0-9_.-]{3,20}" placeholder="[a-zA-Z0-9_.-]{3,20}"
-        class="padded" required>
+        class="padded" required autofocus>
       <label for="color" class="label">Color:</label>
       <input type="color" id="color" name="color" class="padded">
       <button type=" submit" class="padded">Login</button>
     </form>
     <form action="#" class="send-message" id="message-form" hidden>
-      <input type="text" name="message" class="message" autocomplete="false" required>
+      <input type="text" name="message" class="message" autocomplete="false" required autofocus>
       <button type="submit" class="padded">Send</button>
     </form>
   </div>
