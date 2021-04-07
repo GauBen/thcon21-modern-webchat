@@ -31,6 +31,15 @@
     return $el;
   };
 
+  const displayConnectionError = () => {
+    $messages.appendChild(
+      createMessage({
+        user: { nickname: "Error", color: "#ff0000" },
+        message: "Connection closed unexpectedly. Please refresh the page.",
+      })
+    );
+  };
+
   ws.onmessage = (e) => {
     const shouldScroll =
       $messages.scrollTop + $messages.clientHeight === $messages.scrollHeight;
@@ -45,16 +54,13 @@
     }
   };
 
-  ws.onerror = (e) => {
-    createMessage({
-      user: { nickname: "Error", color: "#ff0000" },
-      message: "Connection closed unexpectedly.",
-    });
-    console.warn(e);
-  };
+  ws.onerror = ws.onclose = (e) => displayConnectionError();
 
   $loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
+    if (ws.readyState !== ws.OPEN) {
+      return;
+    }
     ws.send(
       JSON.stringify({
         nickname: $loginForm.elements.nickname.value,
@@ -65,6 +71,9 @@
 
   $messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
+    if (ws.readyState !== ws.OPEN) {
+      return;
+    }
     ws.send(
       JSON.stringify({
         message: $messageForm.elements.message.value,

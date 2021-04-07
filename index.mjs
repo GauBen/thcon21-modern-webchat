@@ -98,7 +98,8 @@ const handleLogin = (client, data) => {
     delete data.admin;
   }
   nicknames.add(data.nickname);
-  client.user = { ...data };
+  client.user = {};
+  Object.assign(client.user, data);
   wsServer.clients.forEach((socket) => {
     socket.send(
       JSON.stringify({
