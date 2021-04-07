@@ -41,7 +41,7 @@ setInterval(sendFlag, 60000);
 const sendError = (client, message) => {
   client.send(
     JSON.stringify({
-      user: { nickname: "Error", color: "#ff4400" },
+      user: { nickname: "Error", color: "#ff0000" },
       message: message,
     })
   );
