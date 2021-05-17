@@ -4,7 +4,7 @@
 - description : IRC c'est du passé
 - author : Gautier
 - category : web
-- difficulty : 5
+- difficulty : 4
 - type : remote
 - port (if used) : 10001
 - exploit script running time :
