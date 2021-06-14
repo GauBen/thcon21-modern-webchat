@@ -137,4 +137,5 @@ wsServer.on("connection", (client) => {
 
 app.use(koaStatic("./public"));
 server.on("request", app.callback());
+console.log("Listening on http://127.0.0.1:8080")
 server.listen(8080);
