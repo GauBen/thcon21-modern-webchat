@@ -8,7 +8,7 @@ Modern Webchat is a CTF challenge of the THCon 2021, in the web category.
 
 ## Details
 
-Modern Webchat is websocket chat shared among all participants, with both the backend and the frontend written in pure JavaScript. An adminstrator named *LePireBot* sends a message every 60 seconds, reading "*Message restricted to administrators.*".
+Modern Webchat is websocket chat shared among all participants, with both the backend and the frontend written in pure JavaScript. An adminstrator named *LePireBot* sends a message every 60 seconds, reading "*Message restricted to administrators.*"
 
 To start the challenge, run `yarn install && node index.mjs`, or `docker build && docker run`.
 
