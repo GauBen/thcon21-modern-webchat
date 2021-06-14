@@ -3,7 +3,7 @@
 Modern Webchat is a CTF challenge of the THCon 2021, in the web category.
 
 <p align="center">
-  <img src="https://repository-images.githubusercontent.com/376723515/30549900-ccf0-11eb-94b1-50b48367ea3c" alt="Screenshot of the webchat">
+  <img src="https://repository-images.githubusercontent.com/376723515/9857af00-ccf1-11eb-863f-33d87d94ca9f" alt="Screenshot of the webchat">
 </p>
 
 ## Details
