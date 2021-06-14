@@ -1,12 +1,19 @@
-# Challenge information file
+# Modern Webchat
 
-- name : Modern Webchat
-- description : IRC c'est du passé
-- author : Gautier
-- category : web
-- difficulty : 4
-- type : remote
-- port (if used) : 10001
-- exploit script running time :
-- network resources needed :
-- git hash of the last version : 0f9f7b8d38c3b0ce820e7a0805c5ed0d92f1ccd6
+Modern Webchat is a CTF challenge of the THCon 2021, in the web category.
+
+![Screenshot of the webchat](https://repository-images.githubusercontent.com/376723515/30549900-ccf0-11eb-94b1-50b48367ea3c)
+
+## Details
+
+Modern Webchat is websocket chat shared among all participants, with both the backend and the frontend written in pure JavaScript. An adminstrator named *LePireBot* sends a message every 60 seconds, reading "*Message restricted to administrators.*".
+
+To start the challenge, run `yarn install && node index.mjs`, or `docker build && docker run`.
+
+## Writeups
+
+* [Write-up by xl00t](https://github.com/xl00t/THCon21/blob/main/Modern%20Webchat.md)
+
+## License
+
+AGPL 3.0 or later
