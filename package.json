@@ -1,9 +1,9 @@
 {
-  "name": "challenge",
+  "name": "modern-webchat",
   "version": "1.0.0",
   "main": "index.mjs",
   "author": "GauBen <benaim.gautier@gmail.com>",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "dependencies": {
     "koa": "^2.13.1",
     "koa-static": "^5.0.0",
